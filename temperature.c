@@ -28,22 +28,23 @@ float kelvin_to_celsius(float kelvin) {
 
 //Categorize Temperature Function | Created by Me
 void categorizeTemperature(float celsius) {
-    if (celsius <= 0) {
+    if (celsius <= 0) { //Celsius is less than 0 | Display specific message
         printf("Temperature category: Freezing\n"
             "Weather advisory: Stay Indoors.");
-    } else if (celsius <= 10) {
+    } else if (celsius <= 10) { //Celsius is less than 10 | Display specific message
         printf("Temperature category: Cold\n"
             "Weather advisory: Wear a jacket.");
-    } else if (celsius <= 25) {
+    } else if (celsius <= 25) { //Celsius is less than 25 | Display specific message
         printf("Temperature category: Comfortable\n"
             "Weather advisory: You should feel comfortable.");
-    } else if (celsius <= 35) {
+    } else if (celsius <= 35) { //Celsius is less than 35 | Display specific message
         printf("Temperature category: Hot\n"
             "Weather advisory: Bring Hydration.");
-    } else {
+    } else { //Celsius is greater than 35 | Display specific message
         printf("Temperature category: Extreme Heat\n"
             "Weather advisory: Try to Stay Indoors or in Shade.");
     }
+    newLine(); //Add an empty line
 }
 
 //Attach Temperature Unit | Created by Me
@@ -59,8 +60,8 @@ void unitAttach(int convert) {
 
 //Convert the Temperature Function | Created by Me
 void convertTemp(float temp, int scale, int convert) {
-    float newTemp = 0;
-    float temporaryTemp = 0;
+    float newTemp = 0; //Float to store converted temperature
+    float temporaryTemp = 0; //Float to store the first of two conversions
     if (scale == 1) { //Starting Temp is Celsius
         if (convert == 2) { //Convert to Fahrenheit
             newTemp = celsius_to_fahrenheit(temp);
@@ -86,13 +87,13 @@ void convertTemp(float temp, int scale, int convert) {
     newLine(); //Empty Line
     printf("Converted temperature: %.2f", newTemp); //Print the converted temperature rounded to two decimal places | Used Google Gemini
     unitAttach(convert); //Attach the correct new Temperature Unit to converted temperature
-    float categorizeTemp = 0;
-    if (scale == 1) {
+    float categorizeTemp = 0; //Float to store possible conversions to celsius
+    if (scale == 1) { //Temperature was originally in celsius
         categorizeTemperature(temp);
-    } else if (scale == 2) {
+    } else if (scale == 2) { //Temperature was originally in fahrenheit
         categorizeTemp = fahrenheit_to_celsius(temp);
         categorizeTemperature(categorizeTemp);
-    } else {
+    } else { //Temperature was originally in kelvin
         categorizeTemp = kelvin_to_celsius(temp);
         categorizeTemperature(categorizeTemp);
     }
@@ -121,22 +122,22 @@ int validKelvin(float kelvin) {
 int checkValid(float temp, int scale, int convert) {
     if (scale == 3) { //Validity Check for Kelvin Only
         if (validKelvin(temp) == 0) { //Check if temperature is negative
-            printf("Error 001: Negative Kelvin\n");
+            printf("Error 001: Negative Kelvin\n"); //Error Message detailing the error
             return 0; //return False
         }
     }
     if (validConvert(scale, convert) == 1) { //Check if conversion are valid
         return 1; //return True
     } else {
-        printf("Error 002: Same Conversion\n");
+        printf("Error 002: Same Conversion\n"); //Error Message detailing the error
         return 0; //return False
     }
 }
 //Main Function | Created by Me
 int main() {
     float *temp; //Initialize a pointer to temp
-    int currScale = 0; //Initialize a pointer to currScale
-    int convertScale = 0; //Initialize a pointer to convertScale
+    int currScale = 0; //Initialize currScale to 0
+    int convertScale = 0; //Initialize convertScale to 0
 
     printf("Enter the temperature: "); //Input Message for entering temperature
     scanf("%f", temp); //Input for temperature
