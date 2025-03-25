@@ -26,6 +26,26 @@ float kelvin_to_celsius(float kelvin) {
     return kelvin - 273.15; //return the result of the conversion equation
 }
 
+//Categorize Temperature Function | Created by Me
+void categorizeTemperature(float celsius) {
+    if (celsius <= 0) {
+        printf("Temperature category: Freezing\n"
+            "Weather advisory: Stay Indoors.");
+    } else if (celsius <= 10) {
+        printf("Temperature category: Cold\n"
+            "Weather advisory: Wear a jacket.");
+    } else if (celsius <= 25) {
+        printf("Temperature category: Comfortable\n"
+            "Weather advisory: You should feel comfortable.");
+    } else if (celsius <= 35) {
+        printf("Temperature category: Hot\n"
+            "Weather advisory: Bring Hydration.");
+    } else {
+        printf("Temperature category: Extreme Heat\n"
+            "Weather advisory: Try to Stay Indoors or in Shade.");
+    }
+}
+
 //Attach Temperature Unit | Created by Me
 void unitAttach(int convert) {
     if (convert == 1) { //Celsius Unit
@@ -55,17 +75,27 @@ void convertTemp(float temp, int scale, int convert) {
             newTemp = celsius_to_kelvin(temporaryTemp);
         }
     } else if (scale == 3) { //Starting Temp is Kelvin
-        if (convert == 1) {
+        if (convert == 1) { //Convert to Celsius
             newTemp = kelvin_to_celsius(temp);
-        } else {
+        } else { //Convert to Fahrenheit
             temporaryTemp = kelvin_to_celsius(temp);
             newTemp = celsius_to_fahrenheit(temporaryTemp);
         }
     }
 
     newLine(); //Empty Line
-    printf("Converted temperature: %.2f", newTemp); //round | Used Google Gemini
+    printf("Converted temperature: %.2f", newTemp); //Print the converted temperature rounded to two decimal places | Used Google Gemini
     unitAttach(convert); //Attach the correct new Temperature Unit to converted temperature
+    float categorizeTemp = 0;
+    if (scale == 1) {
+        categorizeTemperature(temp);
+    } else if (scale == 2) {
+        categorizeTemp = fahrenheit_to_celsius(temp);
+        categorizeTemperature(categorizeTemp);
+    } else {
+        categorizeTemp = kelvin_to_celsius(temp);
+        categorizeTemperature(categorizeTemp);
+    }
 
 }
 
